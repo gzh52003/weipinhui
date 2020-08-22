@@ -1,12 +1,12 @@
 <template>
-    <div>
-        goods
-    </div>
+<div>
+    Goods
+</div>
 </template>
 <script>
-export default {
-
-}
+     export default {
+        
+    }
 </script>
-<style lang='scss'>
+<style lang ="scss">
 </style>

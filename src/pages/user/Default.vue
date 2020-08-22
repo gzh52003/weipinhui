@@ -1,13 +1,12 @@
 <template>
-    <div>
-        用户管理
-        <router-view/>
-    </div>
+<div>
+    <router-view/>
+</div>
 </template>
 <script>
-export default {
-
-}
+     export default {
+        
+    }
 </script>
-<style lang='scss'>
+<style lang ="scss">
 </style>

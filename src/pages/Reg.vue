@@ -1,12 +1,12 @@
 <template>
-    <div>
-        reg
-    </div>
+<div>
+    Reg
+</div>
 </template>
 <script>
-export default {
-
-}
+     export default {
+        
+    }
 </script>
-<style lang='scss'>
+<style lang ="scss">
 </style>
