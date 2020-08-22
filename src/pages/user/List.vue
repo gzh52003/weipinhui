@@ -54,13 +54,15 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
-      }).then(async () => {
-        const { data } = await this.$request.delete("/user/" + id);
-        this.userlist = this.userlist.filter((item) => item._id !== id);
-        this.$message({
-          type: "success",
-          message: "删除成功!",
-        });
+      })
+      .then(async () => {
+        console.log(id);
+      //   const { data } = await this.$request.delete("/user/" + id);
+      //   this.userlist = this.userlist.filter((item) => item._id !== id);
+      //   this.$message({
+      //     type: "success",
+      //     message: "删除成功!",
+      //   });
       });
     },
     goto(id) {

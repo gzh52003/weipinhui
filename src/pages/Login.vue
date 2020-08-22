@@ -7,7 +7,7 @@
     :rules="rules"
     ref="ruleForm"
     label-width="100px"
-    class="demo-ruleForm"
+    class="demo-ruleForm landIn"
   >
   <p class="Login_">账号密码登录</p>
     <el-form-item label="用户名" prop="username" style="width:250px">
@@ -22,7 +22,7 @@
     <el-form-item>
       <el-button type="success" @click="submitForm('ruleForm')" style="margin-top:15px">登录</el-button>
       <el-button @click="resetForm('ruleForm')">重置</el-button>
-      <el-button @click="toReg()">shortJump</el-button>
+      <el-button @click="toHome()"><a href="reg">没有账号？注册</a></el-button>
     </el-form-item>
   </el-form>
   </div>
@@ -81,9 +81,9 @@ export default {
     };
   },
   methods: {
-    toReg(){
-        this.$router.push('./home')
-    },
+    // toHome(){
+    //     this.$router.push('./reg')
+    // },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -101,6 +101,10 @@ export default {
 };
 </script>
 <style lang ="scss">
+a{
+  text-decoration: none;
+  color: blue;
+}
 body{
     position: relative;
     /* background-color: brown; */
@@ -124,7 +128,7 @@ body{
   margin-left: 48px;
   margin-bottom: 20px;;
 }
-.demo-ruleForm{
+.landIn{
 
   z-index: 999;
   border:2px solid #cccccc;
