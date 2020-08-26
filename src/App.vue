@@ -19,8 +19,8 @@
             <i class="el-icon-food"></i>后台管理系统
           </el-col>
           <el-col :span="12" style="text-align:right">
-            <el-button type="text" @click="toLogin()">登录</el-button>
-            <el-button type="text" @click="toReg()">注册</el-button>
+            <p class="p-username">{{showUserName}}</p>
+            <el-button type="text" @click="toLogin()">退出登录</el-button>
           </el-col>
         </el-row>
       </el-header>
@@ -33,7 +33,6 @@
             text-color="#fff"
             active-text-color="#ffd04b"
             router
-            v-show="isShow"
           >
             <template v-for="item in menu">
               <el-menu-item :index="item.path" :key="item.path" v-if="!item.submenu">
@@ -61,7 +60,7 @@
             <el-breadcrumb-item>活动管理</el-breadcrumb-item>
             <el-breadcrumb-item>活动列表</el-breadcrumb-item>
             <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-          </el-breadcrumb> -->
+          </el-breadcrumb>-->
           <div class="project">
             <router-view />
           </div>
@@ -71,6 +70,8 @@
   </div>
 </template>
 <script>
+import Cookie from "js-cookie";
+
 export default {
   name: "App",
   data() {
@@ -111,12 +112,17 @@ export default {
       currentIndex: 0,
     };
   },
+  computed: {
+    showUserName() {
+      return Cookie.get("username");
+    },
+  },
   methods: {
     toLogin() {
       this.$router.push("/login");
     },
     toReg() {
-      this.$router.push("reg");
+      this.$router.push("/reg");
     },
     goto(path, idx) {
       this.$router.push(path);
@@ -128,14 +134,14 @@ export default {
   },
   components: {},
   created() {
-    this.isShow = this.$route.path == "/login"? false : true;
+    this.isShow = this.$route.path == "/login" ? false : true;
   },
   watch: {
     $route: {
       deep: true,
       handler(newval) {
-        this.isShow = newval.path == "/login"? false : true;
-        },
+        this.isShow = newval.path == "/login" ? false : true;
+      },
     },
   },
 };
@@ -187,5 +193,16 @@ html {
       margin-right: 25px;
     }
   }
+}
+.p-username {
+  margin-right: 20px;
+  font-size: 14px;
+  color: #ccc;
+  display: inline-block;
+}
+.el-menu{
+  width:200px;
+  margin:0;
+  padding:0;
 }
 </style>

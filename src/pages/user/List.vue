@@ -48,8 +48,6 @@ export default {
   methods: {
     async deleteUser(id) {
       
-      // const { data } = await this.$request.delete("/user/" + id);
-      // this.userlist = this.userlist.filter((item) => item._id !== id);
       this.$confirm("是否删除该用户?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -57,12 +55,13 @@ export default {
       })
       .then(async () => {
         console.log(id);
-      //   const { data } = await this.$request.delete("/user/" + id);
-      //   this.userlist = this.userlist.filter((item) => item._id !== id);
-      //   this.$message({
-      //     type: "success",
-      //     message: "删除成功!",
-      //   });
+        const { data } = await this.$request.delete("/user/" + id);
+        this.userlist = this.userlist.filter((item) => item._id !== id);
+        this.$message({
+          type: "success",
+          message: "删除成功!",
+        });
+        console.log(data)
       });
     },
     goto(id) {
