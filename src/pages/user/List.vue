@@ -82,6 +82,7 @@ export default {
         //  const { data } = await this.$request.delete("/user/" + ids);
         for (let i = 0; i < ids.length; i++) {
           let { data } = await this.$request.delete("/user/" + ids[i]);
+          console.log(data);
           this.userlist = this.userlist.filter((item) => item._id !== ids[i]);
         }
         history.go(0);
@@ -102,6 +103,7 @@ export default {
         type: "warning",
       }).then(async () => {
         const { data } = await this.$request.delete("/user/" + id);
+        console.log(data);
         this.userlist = this.userlist.filter((item) => item._id !== id);
         this.$message({
           type: "success",

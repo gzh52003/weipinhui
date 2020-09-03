@@ -13,10 +13,10 @@
             </ul>
     </nav>-->
     <el-container>
-      <el-header class="header">
+      <el-header class="header" height="100px">
         <el-row>
           <el-col :span="12" class="logo">
-            <i class="el-icon-food"></i>后台管理系统
+            <i class="el-icon-food"></i>谜之书库后台管理系统
           </el-col>
           <el-col :span="12" style="text-align:right">
             <p class="p-username">{{userInfo.username}}</p>
@@ -25,7 +25,7 @@
         </el-row>
       </el-header>
       <el-container>
-        <el-aside width="200px">
+        <el-aside>
           <el-menu
             class="el-menu-demo"
             mode="vertical"
@@ -99,6 +99,16 @@ export default {
           text: "商品管理",
           path: "/goods",
           icon_Name: "el-icon-basketball",
+          submenu:[
+            {
+              text:"商品列表",
+              path:"/glist"
+            },
+            {
+              text:"添加商品",
+              path:"/gadd"
+            },
+          ],
         },
         {
           text: "订单管理",
@@ -190,8 +200,7 @@ html {
 }
 .header {
   background-color: blueviolet;
-  line-height: 60px;
-
+  line-height: 100px;
   .logo {
     font-size: 30px;
     color: cornsilk;

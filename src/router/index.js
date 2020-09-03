@@ -4,7 +4,10 @@ import User from '../pages/user/Default.vue'
 import Userlist from '../pages/user/List.vue'
 import Useradd from '../pages/user/Add.vue'
 import UserEdit from '../pages/user/Edit.vue'
-import Goods from '../pages/Goods.vue'
+import Goods from '../pages/goods/Default.vue'
+import Goodslist from '../pages/goods/List.vue'
+import Goodsadd from '../pages/goods/Add.vue'
+import GoodsEdit from '../pages/goods/Edit.vue'
 import Order from '../pages/Order.vue'
 // import Index from '../pages/Index.vue'
 import Reg from '../pages/Reg.vue'
@@ -58,11 +61,22 @@ const router = new VueRouter({
             }]
 
         }, {
-            path: '/goods',
-            component: Goods,
-            meta: {
-                requiresAuth: true
-            },
+            path:'/goods',
+            component:Goods,
+            children:[{
+                path:'',
+                redirect:'glist'
+            },{
+                path:'glist',
+                component:Goodslist
+            },{
+                path:'gadd',
+                component:Goodsadd
+            },{
+                name:'goodsEdit',
+                path:'edit/:id',
+                component:GoodsEdit
+            }]
         }, {
             path: '/order',
             component: Order,
