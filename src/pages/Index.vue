@@ -19,7 +19,7 @@
             <i class="el-icon-food"></i>后台管理系统
           </el-col>
           <el-col :span="12" style="text-align:right">
-            <p class="p-username">{{userInfo.username}}</p>
+            <p class="p-username">{{showUserName()}}</p>
             <el-button type="text" @click="toLogin()">退出登录</el-button>
           </el-col>
         </el-row>
@@ -70,6 +70,8 @@
   </div>
 </template>
 <script>
+import Cookie from "js-cookie";
+
 export default {
   name: "App",
   data() {
@@ -110,32 +112,22 @@ export default {
       currentIndex: 0,
     };
   },
-  computed: {
-    
-  },
+  computed: {},
   watch: {
     $route(to, from) {
-      console.log(to)
+      console.log(to);
       if (from.path === "/login") {
-        this.getUserInfo();
-      }
-      if(to.path === '/login'){
-        this.toLogin();
+        this.showUserName();
       }
     },
   },
   methods: {
-    getUserInfo() {
-      const userInfo = localStorage.getItem('userInfo') || {}
-      try{
-        this.userInfo = JSON.parse(userInfo);
-      }catch(err){
-        this.userInfo = {}
-      }
+    showUserName() {
+      return Cookie.get("username");
     },
     toLogin() {
       this.$router.push("/login");
-      localStorage.removeItem('userInfo');
+      Cookie.remove("username");
     },
     toReg() {
       this.$router.push("/reg");
@@ -150,7 +142,7 @@ export default {
   },
   components: {},
   created() {
-    this.getUserInfo();
+    this.showUserName();
   },
 };
 </script>

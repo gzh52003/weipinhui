@@ -28,6 +28,9 @@
         <span id="svgVcode" @click="addVcode()"></span>
       </el-form-item>
       <el-form-item>
+        <el-checkbox label="下次免登陆" v-model="ruleForm.mdl"></el-checkbox>
+      </el-form-item>
+      <el-form-item>
         <el-button type="success" @click="submitForm('ruleForm')" style="margin-top:15px">登录</el-button>
         <el-button @click="resetForm('ruleForm')">重置</el-button>
         <el-button @click="toReg()">没有账号？注册</el-button>
@@ -36,8 +39,6 @@
   </div>
 </template>
 <script>
-import Cookie from "js-cookie";
-
 export default {
   data() {
     // var checkAge = (rule, value, callback) => {
@@ -83,11 +84,11 @@ export default {
         username: "",
         password: "",
         captcha_code: "",
+        mdl:true
       },
       rules: {
         username: [{ validator: validateUsername, trigger: "blur" }],
         password: [{ validator: validatePassword, trigger: "blur" }],
-        // age: [{ validator: checkAge, trigger: "blur" }],
       },
     };
   },
@@ -107,10 +108,12 @@ export default {
           const { data } = await this.$request.get("/login", {
             params: { username, password, vcode },
           });
-
-          Cookie.set("username", username);
           if (data.code === 1) {
-            this.$router.push("./home");
+            localStorage.setItem('userInfo',JSON.stringify(data.data))
+            
+            const { redirectTo = "/home" } = this.$route.query;
+            this.$router.replace(redirectTo);
+
             this.$message({
               message: "恭喜你，登录成功",
               type: "success",
@@ -118,7 +121,7 @@ export default {
           } else if (data.code === 10) {
             this.$message.error("验证码输入错误");
             this.addVcode();
-          }else{
+          } else {
             this.$message.error("您的输入有误，请重新输入");
             this.addVcode();
           }
