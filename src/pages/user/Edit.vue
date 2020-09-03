@@ -63,7 +63,7 @@ export default {
 
     // }
     return {
-        userid:'',
+      userid: "",
       ruleForm: {
         username: "",
         password: "",
@@ -73,24 +73,31 @@ export default {
       rules: {
         // password: [{ validator: validatePassword, trigger: "blur" }],
         age: [{ validator: checkAge, trigger: "blur" }],
-      }
+      },
     };
   },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-            const {userid,ruleForm}  = this
-          this.$request.put('/user/'+userid,{
-              ...ruleForm
-          })
-          this.$router.push('../list')
-               this.$message({
-          message: '修改成功',
-          type: 'success',
-        })
+          const { userid, ruleForm } = this;
+          this.$request.put("/user/" + userid, {
+            ...ruleForm,
+          });
+          this.$message({
+            message: "修改成功",
+            type: "success",
+          });
+           const {data} = this.$router.push("../list");
+          if (data.code === 1) {
+            this.$router.push("../list");
+            this.$message({
+              message: "添加成功",
+              type: "success",
+            });
+          }
         } else {
-                     this.$message.error('修改失败')
+          this.$message.error("修改失败");
           return false;
         }
       });
@@ -100,7 +107,8 @@ export default {
     console.log(this.$route);
     const { id } = this.$route.params;
     const { data } = await this.$request.get("/user/" + id);
-    this.userid = id
+    console.log(data);
+    this.userid = id;
     console.log("user=", data);
     Object.assign(this.ruleForm, data.data);
   },

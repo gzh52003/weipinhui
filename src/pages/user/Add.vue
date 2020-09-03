@@ -87,13 +87,13 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           const { ruleForm } = this;
-        //   const { username, password, age, gender } = ruleForm;
+          //   const { username, password, age, gender } = ruleForm;
           this.$request.post("/user/", {
             // username,
             // password,
             // gender,
             // age,
-            ...ruleForm
+            ...ruleForm,
           });
 
           this.$router.push("./list");
